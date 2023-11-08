@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'basicscreen.dart';
+
 void homepage() => runApp(MaterialApp(
       title: 'Campus Cruise',
       home: home(),
@@ -99,7 +101,7 @@ class _MenuPageState extends State<MenuPage> {
                         )),
                     onPressed: () {
                       //TO DO: Add login functionality
-                      //Navigator.push(context, MaterialPageRoute(builder: (_) => MenuPage(title: 'Campus Cruise')));
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => BasicScreenPage(title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
