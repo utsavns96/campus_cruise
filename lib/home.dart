@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'map_page.dart';
 
 void homepage() => runApp(MaterialApp(
       title: 'Campus Cruise',
@@ -118,8 +119,10 @@ class _MenuPageState extends State<MenuPage> {
                           color: Colors.white,
                         )),
                     onPressed: () {
-                      //TO DO: Add login functionality
-                      //Navigator.push(context, MaterialPageRoute(builder: (_) => MenuPage(title: 'Campus Cruise')));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapPage()),
+                      );
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
