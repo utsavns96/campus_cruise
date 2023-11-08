@@ -104,7 +104,11 @@ class _MenuPageState extends State<MenuPage> {
                         )),
                     onPressed: () {
                       //TO DO: Add login functionality
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => BasicScreenPage(title: 'Campus Cruise')));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  BasicScreenPage(title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
@@ -123,9 +127,11 @@ class _MenuPageState extends State<MenuPage> {
                           color: Colors.white,
                         )),
                     onPressed: () {
-                      //TO DO: Add login functionality
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => BookingScreen(title: 'Campus Cruise')));
-                    },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapPage()),
+                  );
+                },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
@@ -144,7 +150,11 @@ class _MenuPageState extends State<MenuPage> {
                         )),
                     onPressed: () {
                       //TO DO: Add login functionality
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => AlertScreenPage(title: 'Campus Cruise')));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  AlertScreenPage(title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
@@ -180,7 +190,10 @@ class _MenuPageState extends State<MenuPage> {
               title: const Text('Contact Us'),
               onTap: () {
                 //Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => ContactUsPage(title: 'Campus Cruise')));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => ContactUsPage(title: 'Campus Cruise')));
               },
             ),
           ],
