@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'alerts.dart';
 import 'basicscreen.dart';
+import 'book.dart';
+import 'contactus.dart';
 
 void homepage() => runApp(MaterialApp(
       title: 'Campus Cruise',
@@ -121,7 +124,7 @@ class _MenuPageState extends State<MenuPage> {
                         )),
                     onPressed: () {
                       //TO DO: Add login functionality
-                      //Navigator.push(context, MaterialPageRoute(builder: (_) => MenuPage(title: 'Campus Cruise')));
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => BookingScreen(title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
@@ -141,7 +144,7 @@ class _MenuPageState extends State<MenuPage> {
                         )),
                     onPressed: () {
                       //TO DO: Add login functionality
-                      //Navigator.push(context, MaterialPageRoute(builder: (_) => MenuPage(title: 'Campus Cruise')));
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => AlertScreenPage(title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
@@ -162,15 +165,22 @@ class _MenuPageState extends State<MenuPage> {
               child: Text('Drawer Header'),
             ),
             ListTile(
-              title: const Text('Item 1'),
+              title: const Text('History'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
+              title: const Text('Feedback'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Contact Us'),
+              onTap: () {
+                //Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => ContactUsPage(title: 'Campus Cruise')));
               },
             ),
           ],
