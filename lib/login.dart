@@ -78,6 +78,8 @@ class _LoginState extends State<Login> {
                     labelText: 'Password',
                     hintText: 'Enter password',
                   ),
+                  obscureText: true,
+                  obscuringCharacter: '*',
                 ),
               ),
               Container(

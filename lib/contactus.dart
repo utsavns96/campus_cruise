@@ -80,37 +80,61 @@ class _contactstate extends State<ContactUsPage> {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  //padding: const EdgeInsets.only(top: 100),
-                  child: const Text(
-                    "Contact Us",
-                    style: TextStyle(
-                      fontFamily: 'Raleway',
-                      fontSize: 50.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      letterSpacing: 8.0,
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    //padding: const EdgeInsets.only(top: 100),
+                    child: const Text(
+                      "Contact Us",
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontSize: 50.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 8.0,
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  child: const Text(
-                    "Click on the button below to call dispatch",
-                    style: TextStyle(
-                      fontFamily: 'Raleway',
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      letterSpacing: 1.0,
-                    ),
+                  // Container(
+                  //   child: const Text(
+                  //     "Click on the button below to call dispatch",
+                  //     style: TextStyle(
+                  //       fontFamily: 'Raleway',
+                  //       fontSize: 20.0,
+                  //       fontWeight: FontWeight.bold,
+                  //       color: Colors.white,
+                  //       letterSpacing: 1.0,
+                  //     ),
+                  //   ),
+                  // ),
+                  Container(
+                      padding: EdgeInsets.only(top: 50),
+                      width: 300,
+                      height: 100,
+                      child: new FloatingActionButton(
+                        child: Text('Call Dispatch',
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
+                        onPressed: () {
+                          //TO DO: Add login functionality
+                          //Navigator.push(context, MaterialPageRoute(builder: (_) => BookingScreen(title: 'Campus Cruise')));
+                        },
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      )
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+
           ],
         )
     );
