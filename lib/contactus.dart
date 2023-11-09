@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-void contactuspage() => runApp(MaterialApp(
-  title: 'Campus Cruise',
-  home: conactus(),
-));
+void contactuspage() => runApp(const MaterialApp(
+      title: 'Campus Cruise',
+      home: conactus(),
+    ));
 
 class conactus extends StatefulWidget {
   const conactus({super.key});
@@ -18,7 +20,7 @@ class _conactusState extends State<conactus> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Campus Cruise',
           style: TextStyle(
             fontFamily: 'Raleway',
@@ -32,7 +34,7 @@ class _conactusState extends State<conactus> {
         elevation: 0.0,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/bgimage.png'),
             fit: BoxFit.cover,
@@ -73,9 +75,9 @@ class _contactstate extends State<ContactUsPage> {
         body: Stack(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage("assets/bgimage.png"),
+                  image: AssetImage("assets/bgimage.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -83,7 +85,7 @@ class _contactstate extends State<ContactUsPage> {
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     //padding: const EdgeInsets.only(top: 100),
@@ -98,66 +100,84 @@ class _contactstate extends State<ContactUsPage> {
                       ),
                     ),
                   ),
-                  // Container(
-                  //   child: const Text(
-                  //     "Click on the button below to call dispatch",
-                  //     style: TextStyle(
-                  //       fontFamily: 'Raleway',
-                  //       fontSize: 20.0,
-                  //       fontWeight: FontWeight.bold,
-                  //       color: Colors.white,
-                  //       letterSpacing: 1.0,
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 150),
+                    child: const Text(
+                      "Click on the button below to call dispatch",
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1.0,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                   Container(
                       padding: EdgeInsets.only(top: 50),
                       width: 300,
                       height: 100,
-                      child: new FloatingActionButton(
-                        child: Text('Call Dispatch',
-                            style: TextStyle(
-                              fontFamily: 'Raleway',
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )),
-                        onPressed: () {
-                          //TO DO: Add login functionality
-                          //Navigator.push(context, MaterialPageRoute(builder: (_) => BookingScreen(title: 'Campus Cruise')));
-                        },
+                      child: FloatingActionButton(
+                        onPressed: () => launchUrlString('tel:123456789'),
                         backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
-                      )
+                        child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Icon(Icons.call),
+                              Text('Call Dispatch',
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  )),
+                            ]),
+                      )),
+                  Container(
+                    padding:
+                        const EdgeInsets.only(top: 150, left: 15, right: 15),
+                    child: const Text(
+                      "Click on the button below to write an email to us at: contactus@campuscruise.com",
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1.0,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   Container(
                       padding: EdgeInsets.only(top: 50),
                       width: 300,
                       height: 100,
-                      child: new FloatingActionButton(
-                        child: Text('Email',
-                            style: TextStyle(
-                              fontFamily: 'Raleway',
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )),
-                        onPressed: () {
-                          //TO DO: Add login functionality
-                          //Navigator.push(context, MaterialPageRoute(builder: (_) => BookingScreen(title: 'Campus Cruise')));
-                        },
+                      child: FloatingActionButton(
+                        onPressed: () => launchUrlString(
+                            'mailto:usharm4@uic.edu?subject=CampusCruise: Contact Us'),
                         backgroundColor: Colors.lightBlue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
-                      )
-                  ),
+                        child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Icon(Icons.email),
+                              Text('Email Us',
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  )),
+                            ]),
+                      )),
                 ],
               ),
             ),
-
           ],
-        )
-    );
+        ));
   }
 }

@@ -5,7 +5,7 @@ import 'basicscreen.dart';
 import 'book.dart';
 import 'contactus.dart';
 
-void homepage() => runApp(MaterialApp(
+void homepage() => runApp(const MaterialApp(
       title: 'Campus Cruise',
       home: home(),
     ));
@@ -23,7 +23,7 @@ class _homeState extends State<home> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Campus Cruise',
           style: TextStyle(
             fontFamily: 'Raleway',
@@ -33,11 +33,11 @@ class _homeState extends State<home> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0x00000000),
+        backgroundColor: const Color(0x00000000),
         elevation: 0.0,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/bgimage.png'),
             fit: BoxFit.cover,
@@ -72,15 +72,15 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0x00000000),
+        backgroundColor: const Color(0x00000000),
         elevation: 0.0,
       ),
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: const AssetImage("assets/bgimage.png"),
+                image: AssetImage("assets/bgimage.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -88,77 +88,77 @@ class _MenuPageState extends State<MenuPage> {
           Column(
             children: <Widget>[
               Container(
-                  padding: EdgeInsets.only(top: 100),
+                  padding: const EdgeInsets.only(top: 100,bottom: 100),
                   child: Image.asset('assets/logo.png')),
               Container(
-                  padding: EdgeInsets.only(top: 50),
+                  padding: const EdgeInsets.only(top: 50),
                   width: 300,
                   height: 100,
-                  child: new FloatingActionButton(
-                    child: Text('Shuttle Locator',
-                        style: TextStyle(
-                          fontFamily: 'Raleway',
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        )),
+                  child: FloatingActionButton(
                     onPressed: () {
                       //TO DO: Add login functionality
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (_) =>
-                                  BasicScreenPage(title: 'Campus Cruise')));
+                                  const BasicScreenPage(title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                  )),
-              Container(
-                  padding: EdgeInsets.only(top: 50),
-                  width: 300,
-                  height: 100,
-                  child: new FloatingActionButton(
-                    child: Text('Book A Ride',
+                    child: const Text('Shuttle Locator',
                         style: TextStyle(
                           fontFamily: 'Raleway',
                           fontSize: 25.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         )),
+                  )),
+              Container(
+                  padding: const EdgeInsets.only(top: 50),
+                  width: 300,
+                  height: 100,
+                  child: FloatingActionButton(
                     onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MapPage()),
+                    MaterialPageRoute(builder: (context) => const MapPage()),
                   );
                 },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                  )),
-              Container(
-                  padding: EdgeInsets.only(top: 50),
-                  width: 300,
-                  height: 100,
-                  child: new FloatingActionButton(
-                    child: Text('Alerts',
+                    child: const Text('Book A Ride',
                         style: TextStyle(
                           fontFamily: 'Raleway',
                           fontSize: 25.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         )),
+                  )),
+              Container(
+                  padding: const EdgeInsets.only(top: 50),
+                  width: 300,
+                  height: 100,
+                  child: FloatingActionButton(
                     onPressed: () {
                       //TO DO: Add login functionality
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (_) =>
-                                  AlertScreenPage(title: 'Campus Cruise')));
+                                  const AlertScreenPage(title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
+                    child: const Text('Alerts',
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        )),
                   )),
             ],
           ),
@@ -193,7 +193,7 @@ class _MenuPageState extends State<MenuPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => ContactUsPage(title: 'Campus Cruise')));
+                        builder: (_) => const ContactUsPage(title: 'Campus Cruise')));
               },
             ),
           ],
