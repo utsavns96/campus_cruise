@@ -77,7 +77,7 @@ class _MyWidgetState extends State<MapPage> {
                     Marker(
                         markerId: MarkerId("_currentLocation"),
                         icon: BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueAzure),
+                            BitmapDescriptor.hueGreen),
                         position: _currentP!),
                     Marker(
                         markerId: MarkerId("_sourceLocation"),
