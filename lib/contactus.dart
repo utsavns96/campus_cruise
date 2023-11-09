@@ -131,6 +131,27 @@ class _contactstate extends State<ContactUsPage> {
                             borderRadius: BorderRadius.circular(10.0)),
                       )
                   ),
+                  Container(
+                      padding: EdgeInsets.only(top: 50),
+                      width: 300,
+                      height: 100,
+                      child: new FloatingActionButton(
+                        child: Text('Email',
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
+                        onPressed: () {
+                          //TO DO: Add login functionality
+                          //Navigator.push(context, MaterialPageRoute(builder: (_) => BookingScreen(title: 'Campus Cruise')));
+                        },
+                        backgroundColor: Colors.lightBlue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      )
+                  ),
                 ],
               ),
             ),
