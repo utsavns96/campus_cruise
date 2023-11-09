@@ -60,6 +60,7 @@ class _HistoryState extends State<HistoryPageScreen> {
     super.initState();
     currentDate = DateTime.now(); // Initialize currentDate to the current date
   }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
@@ -75,6 +76,10 @@ class _HistoryState extends State<HistoryPageScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
+              ),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () => Navigator.of(context).pop(),
               ),
               centerTitle: true,
               //backgroundColor: Color(0x00000000),
@@ -104,9 +109,7 @@ class _HistoryState extends State<HistoryPageScreen> {
                       fontFamily: 'Raleway',
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
-                  )
-              ),
+                      color: Colors.white)),
               /*
               Tab 2 - Completed
                */
@@ -125,7 +128,11 @@ class _HistoryState extends State<HistoryPageScreen> {
                           children: <Widget>[
                             Container(
                               margin: EdgeInsets.all(20.0),
-                              child: const Icon(Icons.directions_car, color: Colors.green, size: 50,),
+                              child: const Icon(
+                                Icons.directions_car,
+                                color: Colors.green,
+                                size: 50,
+                              ),
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -137,9 +144,11 @@ class _HistoryState extends State<HistoryPageScreen> {
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold)),
-                                    Text(getRandomAddress(), // Call the function here
+                                    Text(
+                                        getRandomAddress(), // Call the function here
                                         style: const TextStyle(
-                                          fontSize: 15.0,)),
+                                          fontSize: 15.0,
+                                        )),
                                   ],
                                 ),
                                 Row(
@@ -148,9 +157,11 @@ class _HistoryState extends State<HistoryPageScreen> {
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold)),
-                                    Text(getRandomAddress(), // Call the function here
+                                    Text(
+                                        getRandomAddress(), // Call the function here
                                         style: const TextStyle(
-                                          fontSize: 15.0,)),
+                                          fontSize: 15.0,
+                                        )),
                                   ],
                                 ),
                                 Row(
@@ -159,15 +170,16 @@ class _HistoryState extends State<HistoryPageScreen> {
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold)),
-                                    Text(getRandomTimestamp(), // Call the function here
+                                    Text(
+                                        getRandomTimestamp(), // Call the function here
                                         style: const TextStyle(
-                                          fontSize: 15.0,)),
+                                          fontSize: 15.0,
+                                        )),
                                   ],
                                 ),
                               ],
                             ),
-                          ]
-                      ),
+                          ]),
                     ),
                 ],
               ),
@@ -189,7 +201,11 @@ class _HistoryState extends State<HistoryPageScreen> {
                           children: <Widget>[
                             Container(
                               margin: EdgeInsets.all(20.0),
-                              child: const Icon(Icons.remove_road, color: Colors.red, size: 50,),
+                              child: const Icon(
+                                Icons.remove_road,
+                                color: Colors.red,
+                                size: 50,
+                              ),
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -201,9 +217,11 @@ class _HistoryState extends State<HistoryPageScreen> {
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold)),
-                                    Text(getRandomAddress(), // Call the function here
+                                    Text(
+                                        getRandomAddress(), // Call the function here
                                         style: const TextStyle(
-                                          fontSize: 15.0,)),
+                                          fontSize: 15.0,
+                                        )),
                                   ],
                                 ),
                                 Row(
@@ -212,9 +230,11 @@ class _HistoryState extends State<HistoryPageScreen> {
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold)),
-                                    Text(getRandomAddress(), // Call the function here
+                                    Text(
+                                        getRandomAddress(), // Call the function here
                                         style: const TextStyle(
-                                          fontSize: 15.0,)),
+                                          fontSize: 15.0,
+                                        )),
                                   ],
                                 ),
                                 Row(
@@ -223,15 +243,16 @@ class _HistoryState extends State<HistoryPageScreen> {
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold)),
-                                    Text(getRandomTimestamp(), // Call the function here
+                                    Text(
+                                        getRandomTimestamp(), // Call the function here
                                         style: const TextStyle(
-                                          fontSize: 15.0,)),
+                                          fontSize: 15.0,
+                                        )),
                                   ],
                                 ),
                               ],
                             ),
-                          ]
-                      ),
+                          ]),
                     ),
                 ],
               ),
@@ -244,8 +265,15 @@ class _HistoryState extends State<HistoryPageScreen> {
 
   String getRandomAddress() {
     var rng = new Random();
-    var streets = ['Halsted St', 'Taylor St', 'Roosevelt St', 'S Morgan St', 'Laflin St'];
-    var houseNumbers = List<String>.generate(700, (i) => (i + rng.nextInt(2000)).toString()); //Generate random address
+    var streets = [
+      'Halsted St',
+      'Taylor St',
+      'Roosevelt St',
+      'S Morgan St',
+      'Laflin St'
+    ];
+    var houseNumbers = List<String>.generate(700,
+        (i) => (i + rng.nextInt(2000)).toString()); //Generate random address
 
     var street = streets[rng.nextInt(streets.length)];
     var houseNumber = houseNumbers[rng.nextInt(houseNumbers.length)];
@@ -255,23 +283,26 @@ class _HistoryState extends State<HistoryPageScreen> {
 
   String getRandomTimestamp() {
     var rng = new Random();
-    DateTime newMinDate = currentDate.subtract(Duration(days: rng.nextInt(3))); // Subtract up to 30 days
-    var startDate = DateTime.now().subtract(Duration(days: 730)); // Start date is 730 days (2 years) ago
+    DateTime newMinDate = currentDate
+        .subtract(Duration(days: rng.nextInt(3))); // Subtract up to 30 days
+    var startDate = DateTime.now()
+        .subtract(Duration(days: 730)); // Start date is 730 days (2 years) ago
     var endDate = newMinDate; // End date
 
     var difference = endDate.difference(startDate);
     var randomDays = difference.inDays > 0 ? rng.nextInt(difference.inDays) : 0;
 
-    currentDate = startDate.add(Duration(days: randomDays)); // Update currentDate
+    currentDate =
+        startDate.add(Duration(days: randomDays)); // Update currentDate
 
     // Add random hours and minutes
-    currentDate = currentDate.add(Duration(hours: rng.nextInt(3), minutes: rng.nextInt(60)));
+    currentDate = currentDate
+        .add(Duration(hours: rng.nextInt(3), minutes: rng.nextInt(60)));
 
-    var formatter = DateFormat('hh:mm dd-MM-yyyy'); // Specify the format you want
+    var formatter =
+        DateFormat('hh:mm dd-MM-yyyy'); // Specify the format you want
     var formattedTimestamp = formatter.format(currentDate);
 
     return formattedTimestamp; // This will be a string in 'hh:mm dd-MM-yyyy' format
   }
 }
-
-
