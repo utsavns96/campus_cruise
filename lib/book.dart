@@ -44,8 +44,26 @@ class _MyWidgetState extends State<MapPage> {
       body: Stack(
         children: <Widget>[
           _currentP == null
-              ? const Center(
-                  child: Text("Loading.."),
+              ? Center(
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/bgimage.png',
+                        fit: BoxFit.cover, // or BoxFit.fill
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                      Center(
+                        child: Text(
+                          'Map Loading...',
+                          style: TextStyle(
+                            fontSize: 35,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 )
               : GoogleMap(
                   onMapCreated: ((GoogleMapController controller) =>
@@ -57,11 +75,13 @@ class _MyWidgetState extends State<MapPage> {
                   markers: {
                     Marker(
                         markerId: MarkerId("_currentLocation"),
-                        icon: BitmapDescriptor.defaultMarker,
+                        icon: BitmapDescriptor.defaultMarkerWithHue(
+                            BitmapDescriptor.hueAzure),
                         position: _currentP!),
                     Marker(
                         markerId: MarkerId("_sourceLocation"),
-                        icon: BitmapDescriptor.defaultMarker,
+                        icon: BitmapDescriptor.defaultMarkerWithHue(
+                            BitmapDescriptor.hueAzure),
                         position: _uicloc),
                   },
                 ),
@@ -71,13 +91,21 @@ class _MyWidgetState extends State<MapPage> {
             right: 0,
             child: Container(
               padding: EdgeInsets.all(8.0),
-              color: Colors.white,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/bgimage.png'),
+                  fit: BoxFit
+                      .cover, // You can use BoxFit.fill for a different effect
+                ),
+              ),
               child: Column(
                 children: <Widget>[
                   TextFormField(
                     decoration: InputDecoration(
                       labelText: 'Pick up location',
                       border: OutlineInputBorder(),
+                      filled: true, // Add this line
+                      fillColor: Colors.white, // Add this line
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -85,6 +113,8 @@ class _MyWidgetState extends State<MapPage> {
                     decoration: InputDecoration(
                       labelText: 'Drop off location',
                       border: OutlineInputBorder(),
+                      filled: true, // Add this line
+                      fillColor: Colors.white, // Add this line
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -93,7 +123,10 @@ class _MyWidgetState extends State<MapPage> {
                         <String>['1', '2', '3', '4', '5'].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value),
+                        child: Container(
+                          color: Colors.white, // Add this line
+                          child: Text(value),
+                        ),
                       );
                     }).toList(),
                     onChanged: (_) {},
