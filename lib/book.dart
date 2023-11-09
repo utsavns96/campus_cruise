@@ -29,40 +29,244 @@ class _MyWidgetState extends State<MapPage> {
     getLocationUpdates();
   }
 
+  // code which just shows the from and to location in a box.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        body: _currentP == null
-            ? const Center(
-                child: Text("Loading.."),
-              )
-            : GoogleMap(
-                onMapCreated: ((GoogleMapController controller) =>
-                    _mapController.complete(controller)),
-                initialCameraPosition: CameraPosition(
-                  target: _uicloc,
-                  zoom: 14,
+      ),
+      body: Stack(
+        children: <Widget>[
+          _currentP == null
+              ? const Center(
+                  child: Text("Loading.."),
+                )
+              : GoogleMap(
+                  onMapCreated: ((GoogleMapController controller) =>
+                      _mapController.complete(controller)),
+                  initialCameraPosition: CameraPosition(
+                    target: _uicloc,
+                    zoom: 14,
+                  ),
+                  markers: {
+                    Marker(
+                        markerId: MarkerId("_currentLocation"),
+                        icon: BitmapDescriptor.defaultMarker,
+                        position: _currentP!),
+                    Marker(
+                        markerId: MarkerId("_sourceLocation"),
+                        icon: BitmapDescriptor.defaultMarker,
+                        position: _uicloc),
+                  },
                 ),
-                markers: {
-                  Marker(
-                      markerId: MarkerId("_currentLocation"),
-                      icon: BitmapDescriptor.defaultMarker,
-                      position: _currentP!),
-                  Marker(
-                      markerId: MarkerId("_sourceLocation"),
-                      icon: BitmapDescriptor.defaultMarker,
-                      position: _uicloc),
-                },
-              ));
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              color: Colors.white,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Pick up location',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Drop off location',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  DropdownButton<String>(
+                    items:
+                        <String>['1', '2', '3', '4', '5'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (_) {},
+                    hint: Text('Select number of riders'),
+                  ),
+                  SizedBox(height: 8.0),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Book'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
+
+  //the second iteration is taking up the whole screen
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       backgroundColor: Colors.transparent,
+  //       leading: IconButton(
+  //         icon: Icon(Icons.arrow_back, color: Colors.black),
+  //         onPressed: () => Navigator.of(context).pop(),
+  //       ),
+  //     ),
+  //     body: Stack(
+  //       children: <Widget>[
+  //         Container(
+  //           decoration: BoxDecoration(
+  //             gradient: LinearGradient(
+  //               begin: Alignment.topCenter,
+  //               end: Alignment.bottomCenter,
+  //               colors: [Colors.blue, Colors.black],
+  //             ),
+  //           ),
+  //         ),
+  //         Center(
+  //           child: Card(
+  //             elevation: 8.0,
+  //             child: Padding(
+  //               padding: EdgeInsets.all(16.0),
+  //               child: Column(
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 children: <Widget>[
+  //                   Text(
+  //                     'Pick Up Location',
+  //                     style: TextStyle(
+  //                       fontSize: 20.0,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                   TextFormField(
+  //                     decoration: InputDecoration(
+  //                       labelText: 'Enter Drop off Location',
+  //                       prefixIcon: Icon(Icons.search),
+  //                       border: OutlineInputBorder(),
+  //                     ),
+  //                   ),
+  //                   SizedBox(height: 16.0),
+  //                   Text('Where would you go?'),
+  //                   DropdownButton<String>(
+  //                     items:
+  //                         <String>['1', '2', '3', '4', '5'].map((String value) {
+  //                       return DropdownMenuItem<String>(
+  //                         value: value,
+  //                         child: Text(value),
+  //                       );
+  //                     }).toList(),
+  //                     onChanged: (_) {},
+  //                     hint: Text('Select number of riders'),
+  //                   ),
+  //                   SizedBox(height: 16.0),
+  //                   ElevatedButton(
+  //                     onPressed: () {},
+  //                     child: Text('Book Ride'),
+  //                     style: ElevatedButton.styleFrom(
+  //                       primary: Colors.blue,
+  //                       onPrimary: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       backgroundColor: Colors.transparent,
+  //       leading: IconButton(
+  //         icon: Icon(Icons.arrow_back, color: Colors.black),
+  //         onPressed: () => Navigator.of(context).pop(),
+  //       ),
+  //     ),
+  //     body: Stack(
+  //       children: <Widget>[
+  //         Align(
+  //           alignment: Alignment.bottomCenter,
+  //           child: Container(
+  //             height: MediaQuery.of(context).size.height * 0.3,
+  //             decoration: BoxDecoration(
+  //               gradient: LinearGradient(
+  //                 begin: Alignment.topCenter,
+  //                 end: Alignment.bottomCenter,
+  //                 colors: [Colors.blue, Colors.black],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //         Center(
+  //           child: Card(
+  //             elevation: 8.0,
+  //             child: Padding(
+  //               padding: EdgeInsets.all(16.0),
+  //               child: Column(
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 children: <Widget>[
+  //                   Text(
+  //                     'Pick Up Location',
+  //                     style: TextStyle(
+  //                       fontSize: 20.0,
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                   TextFormField(
+  //                     decoration: InputDecoration(
+  //                       labelText: 'Enter Drop off Location',
+  //                       prefixIcon: Icon(Icons.search),
+  //                       border: OutlineInputBorder(),
+  //                     ),
+  //                   ),
+  //                   SizedBox(height: 16.0),
+  //                   Text('Where would you go?'),
+  //                   DropdownButton<String>(
+  //                     items:
+  //                         <String>['1', '2', '3', '4', '5'].map((String value) {
+  //                       return DropdownMenuItem<String>(
+  //                         value: value,
+  //                         child: Text(value),
+  //                       );
+  //                     }).toList(),
+  //                     onChanged: (_) {},
+  //                     hint: Text('Select number of riders'),
+  //                   ),
+  //                   SizedBox(height: 16.0),
+  //                   ElevatedButton(
+  //                     onPressed: () {},
+  //                     child: Text('Book Ride'),
+  //                     style: ElevatedButton.styleFrom(
+  //                       primary: Colors.blue,
+  //                       onPrimary: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Future<void> _cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await _mapController.future;
