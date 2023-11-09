@@ -48,15 +48,38 @@ class _MyWidgetState extends State<MapPage> {
           final lat = detail.result.geometry!.location!.lat;
           final lng = detail.result.geometry!.location!.lng;
 
-          setState(() {
-            if (isPickup) {
-              _uicloc = LatLng(lat, lng);
-              pickupController.text = p.description ?? '';
-            } else {
-              _homelocs = LatLng(lat, lng);
-              dropoffController.text = p.description ?? '';
-            }
-          });
+          LatLngBounds boundary = LatLngBounds(
+            southwest: LatLng(41.86262999560797, -87.67623910689167),
+            northeast: LatLng(41.87485447153885, -87.64407719873702),
+          );
+          if (boundary.contains(LatLng(lat, lng))) {
+            setState(() {
+              if (isPickup) {
+                _uicloc = LatLng(lat, lng);
+                pickupController.text = p.description ?? '';
+              } else {
+                _homelocs = LatLng(lat, lng);
+                dropoffController.text = p.description ?? '';
+              }
+            });
+          } else {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Error'),
+                    content: Text(
+                        'Selected location is outside the boundary. Please reselect a location.'),
+                    actions: <Widget>[
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Ok'))
+                    ],
+                  );
+                });
+          }
         } else {
           // Handle the case where the place details are not available or the location is null
         }
