@@ -88,82 +88,96 @@ class _basicState extends State<AlertScreenPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget> [
-                          Container(
-                            //padding: EdgeInsets.only(top: 100),
-                            width:350,
-                            height:30,
-                            color: Colors.amber,
-                            child: Center(
-                              child: const Text(
-                                "ALERT",
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                              width:350,
-                              height:125,
-                              color: Colors.black,
-                              child: Center(
-                                child: const Text(
-                                  "Night Ride Service Timings Change: Starting Fall 2023, NightRide Service will be available from 10:00 pm to 7:00 am on all 7 days of the week ",
-                                  style: TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              )
-                          )
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget> [
-                          Container(
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                              //padding: EdgeInsets.only(top: 100),
                               width:350,
                               height:30,
-                              color: Colors.red,
+                              color: Colors.amber,
                               child: Center(
                                 child: const Text(
-                                    "WARNING",
-                                    style: TextStyle(
-                                      fontFamily: 'Raleway',
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    )
-                                ),
-                              )
-                          ),
-                          Container(
-                              width:350,
-                              height:125,
-                              color: Colors.black,
-                              child: Center(
-                                child: const Text(
-                                  "Night Ride Services are currently disrupted from Taylor & Racine to Taylor & Ada streets due to roadwork. Riders are requested to take this into account while booking rides",
+                                  "ALERT",
                                   style: TextStyle(
                                     fontFamily: 'Raleway',
-                                    fontSize: 15.0,
+                                    fontSize: 25.0,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
                                 ),
-                              )
+                              ),
+                            )
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                                width:350,
+                                height:125,
+                                color: Colors.black,
+                                child: Center(
+                                  child: const Text(
+                                    "Night Ride Service Timings Change: Starting Fall 2023, NightRide Service will be available from 10:00 pm to 7:00 am on all 7 days of the week ",
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                            )
                           )
                         ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget> [
-                          Container(
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                              child: Container(
+                                  width:350,
+                                  height:30,
+                                  color: Colors.red,
+                                  child: Center(
+                                    child: const Text(
+                                        "WARNING",
+                                        style: TextStyle(
+                                          fontFamily: 'Raleway',
+                                          fontSize: 25.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        )
+                                    ),
+                                  )
+                              )
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                                width:350,
+                                height:125,
+                                color: Colors.black,
+                                child: Center(
+                                  child: const Text(
+                                    "Night Ride Services are currently disrupted from Taylor & Racine to Taylor & Ada streets due to roadwork. Riders are requested to take this into account while booking rides",
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                            )
+                          )
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget> [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
                               width:350,
                               height:30,
                               color: Colors.deepPurpleAccent,
@@ -178,8 +192,11 @@ class _basicState extends State<AlertScreenPage> {
                                     )
                                 ),
                               )
+                            )
                           ),
-                          Container(
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
                               width:350,
                               height:125,
                               color: Colors.black,
@@ -194,6 +211,7 @@ class _basicState extends State<AlertScreenPage> {
                                   ),
                                 ),
                               )
+                            )
                           )
                         ],
                       )
