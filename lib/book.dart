@@ -164,13 +164,18 @@ class _MyWidgetState extends State<MapPage> {
                             BitmapDescriptor.hueMagenta),
                         position: _homelocs),
                   },
-                  circles: Set<Circle>.of(
-                    <Circle>[
-                      Circle(
-                        circleId: CircleId("0"),
-                        center: _uicloc,
-                        radius: 1000,
-                        fillColor: Color.fromARGB(255, 160, 159, 243).withAlpha(70),
+                  polygons: Set<Polygon>.of(
+                    <Polygon>[
+                      Polygon(
+                        polygonId: PolygonId("0"),
+                        points: [
+                          LatLng(41.87421885646101, -87.64407719873702),
+                          LatLng(41.86262999560797, -87.64713711078548),
+                          LatLng(41.86362760041953, -87.67576633078501),
+                          LatLng(41.87485447153885, -87.67623910689167)
+                        ],
+                        fillColor:
+                            Color.fromARGB(255, 160, 159, 243).withAlpha(70),
                         strokeWidth: 3,
                         strokeColor: Color.fromARGB(255, 160, 159, 243),
                       ),
