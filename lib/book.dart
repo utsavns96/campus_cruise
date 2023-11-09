@@ -164,6 +164,18 @@ class _MyWidgetState extends State<MapPage> {
                             BitmapDescriptor.hueMagenta),
                         position: _homelocs),
                   },
+                  circles: Set<Circle>.of(
+                    <Circle>[
+                      Circle(
+                        circleId: CircleId("0"),
+                        center: _uicloc,
+                        radius: 1000,
+                        fillColor: Color.fromARGB(255, 160, 159, 243).withAlpha(70),
+                        strokeWidth: 3,
+                        strokeColor: Color.fromARGB(255, 160, 159, 243),
+                      ),
+                    ],
+                  ),
                 ),
           Positioned(
             bottom: 0,
@@ -194,7 +206,7 @@ class _MyWidgetState extends State<MapPage> {
                   TextFormField(
                     controller: dropoffController,
                     readOnly: true,
-                    onTap: () => _handlePressButton(context, true),
+                    onTap: () => _handlePressButton(context, false),
                     decoration: InputDecoration(
                       labelText: 'Drop off location',
                       border: OutlineInputBorder(),
