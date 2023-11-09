@@ -32,14 +32,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         backgroundColor: const Color(0x00000000),
         elevation: 0.0,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bgimage.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+      // body: Container(
+      //   decoration: const BoxDecoration(
+      //     image: DecorationImage(
+      //       image: AssetImage('assets/bgimage.png'),
+      //       fit: BoxFit.cover,
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'basicscreen.dart';
 import 'book.dart';
 import 'contactus.dart';
 import 'feedback.dart';
+import 'history.dart';
 
 void homepage() => runApp(const MaterialApp(
       title: 'Campus Cruise',
@@ -198,11 +199,16 @@ class _MenuPageState extends State<MenuPage> {
                 ),
               ),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) =>
+                            const HistoryPageScreen(title: 'Campus Cruise')));
               },
             ),
             ListTile(
-              title: const Text('Feedback',
+              title: const Text(
+                'Feedback',
                 style: TextStyle(
                   fontFamily: 'Raleway',
                   fontSize: 25.0,
@@ -219,7 +225,8 @@ class _MenuPageState extends State<MenuPage> {
               },
             ),
             ListTile(
-              title: const Text('Contact Us',
+              title: const Text(
+                'Contact Us',
                 style: TextStyle(
                   fontFamily: 'Raleway',
                   fontSize: 25.0,
