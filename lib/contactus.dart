@@ -108,7 +108,7 @@ class _contactstate extends State<ContactUsPage> {
                         fontFamily: 'Raleway',
                         fontSize: 15.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.grey,
                         letterSpacing: 1.0,
                       ),
                       textAlign: TextAlign.center,
@@ -145,7 +145,7 @@ class _contactstate extends State<ContactUsPage> {
                         fontFamily: 'Raleway',
                         fontSize: 15.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.grey,
                         letterSpacing: 1.0,
                       ),
                       textAlign: TextAlign.center,
@@ -165,7 +165,7 @@ class _contactstate extends State<ContactUsPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Icon(Icons.email),
-                              Text('Email Us',
+                              Text('Email',
                                   style: TextStyle(
                                     fontFamily: 'Raleway',
                                     fontSize: 25.0,
