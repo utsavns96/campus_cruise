@@ -165,7 +165,7 @@ class FeedbackState extends State<FeedbackPage> {
                             fontFamily: 'Raleway',
                             fontSize: 15.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             letterSpacing: 1.0,
                           ),
                         ),
