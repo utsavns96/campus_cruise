@@ -1,4 +1,5 @@
 import 'package:campus_cruise/home.dart';
+import 'package:campus_cruise/register.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MaterialApp(
@@ -124,7 +125,11 @@ class _LoginState extends State<Login> {
                   height: 100,
                   child: FloatingActionButton(
                     onPressed: () {
-                      //TO DO: Add register functionality
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const RegisterScreenPage(
+                                  title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
