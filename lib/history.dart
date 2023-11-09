@@ -98,7 +98,15 @@ class _HistoryState extends State<HistoryPageScreen> {
               /*
               Tab 1 - Upcoming
                */
-              Text('Upcoming'),
+              Text('No Upcoming Rides',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                  )
+              ),
               /*
               Tab 2 - Completed
                */
@@ -166,7 +174,67 @@ class _HistoryState extends State<HistoryPageScreen> {
               /*
               Tab 3 - Cancelled
                */
-              Text('Cancelled'),
+              ListView(
+                children: <Widget>[
+                  for (var i = 0; i < 5; i++)
+                    Container(
+                      margin: EdgeInsets.all(10.0),
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.all(20.0),
+                              child: const Icon(Icons.remove_road, color: Colors.red, size: 50,),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    const Text('Pickup: ',
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold)),
+                                    Text(getRandomAddress(), // Call the function here
+                                        style: const TextStyle(
+                                          fontSize: 15.0,)),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    const Text('Dropoff: ',
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold)),
+                                    Text(getRandomAddress(), // Call the function here
+                                        style: const TextStyle(
+                                          fontSize: 15.0,)),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    const Text('Time: ',
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold)),
+                                    Text(getRandomTimestamp(), // Call the function here
+                                        style: const TextStyle(
+                                          fontSize: 15.0,)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ]
+                      ),
+                    ),
+                ],
+              ),
             ]),
           ),
         ),
@@ -197,7 +265,7 @@ class _HistoryState extends State<HistoryPageScreen> {
     currentDate = startDate.add(Duration(days: randomDays)); // Update currentDate
 
     // Add random hours and minutes
-    currentDate = currentDate.add(Duration(hours: rng.nextInt(12), minutes: rng.nextInt(60)));
+    currentDate = currentDate.add(Duration(hours: rng.nextInt(3), minutes: rng.nextInt(60)));
 
     var formatter = DateFormat('hh:mm dd-MM-yyyy'); // Specify the format you want
     var formattedTimestamp = formatter.format(currentDate);
