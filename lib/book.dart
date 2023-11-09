@@ -5,6 +5,8 @@ import 'package:campus_cruise/booked.dart';
 import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:google_maps_webservice/places.dart' as gmaps;
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -19,18 +21,90 @@ class _MyWidgetState extends State<MapPage> {
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
-  static const LatLng _uicloc = LatLng(41.869849, -87.647914);
-  static const LatLng _homelocs = LatLng(41.868473, -87.658735);
+  static LatLng _uicloc = LatLng(41.869849, -87.647914);
+  static LatLng _homelocs = LatLng(41.868473, -87.658735);
   LatLng? _currentP = null;
+
+  gmaps.GoogleMapsPlaces _places =
+      gmaps.GoogleMapsPlaces(apiKey: "AIzaSyAxcYboZEC-2VQhftB4rPMo2Gsi_K-ywiE");
+
+  final pickupController = TextEditingController();
+  final dropoffController = TextEditingController();
+
+  Future<void> _handlePressButton(BuildContext context, bool isPickup) async {
+    gmaps.Prediction? p = await PlacesAutocomplete.show(
+      context: context,
+      apiKey: 'AIzaSyAxcYboZEC-2VQhftB4rPMo2Gsi_K-ywiE',
+      mode: Mode.overlay,
+    );
+
+    if (p != null) {
+      final placeId = p.placeId;
+      if (placeId != null) {
+        gmaps.PlacesDetailsResponse detail =
+            await _places.getDetailsByPlaceId(placeId);
+
+        if (detail.status == "OK" && detail.result.geometry?.location != null) {
+          final lat = detail.result.geometry!.location!.lat;
+          final lng = detail.result.geometry!.location!.lng;
+
+          setState(() {
+            if (isPickup) {
+              _uicloc = LatLng(lat, lng);
+              pickupController.text = p.description ?? '';
+            } else {
+              _homelocs = LatLng(lat, lng);
+              dropoffController.text = p.description ?? '';
+            }
+          });
+        } else {
+          // Handle the case where the place details are not available or the location is null
+        }
+      }
+    }
+  }
+
+  Future<void> getLocationUpdates() async {
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await _locationController.serviceEnabled();
+
+    if (_serviceEnabled) {
+      _serviceEnabled = await _locationController.requestService();
+    } else {
+      return;
+    }
+
+    _permissionGranted = await _locationController.hasPermission();
+
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await _locationController.requestPermission();
+
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationController.onLocationChanged
+        .listen((LocationData currentLocation) {
+      if (currentLocation.latitude != null &&
+          currentLocation.longitude != null) {
+        setState(() {
+          _currentP =
+              LatLng(currentLocation.latitude!, currentLocation.longitude!);
+          _cameraToPosition(_currentP!);
+        });
+      }
+    });
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getLocationUpdates();
   }
 
-// code which just shows the from and to location in a box.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +124,7 @@ class _MyWidgetState extends State<MapPage> {
                     children: <Widget>[
                       Image.asset(
                         'assets/bgimage.png',
-                        fit: BoxFit.cover, // or BoxFit.fill
+                        fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
                       ),
@@ -84,6 +158,11 @@ class _MyWidgetState extends State<MapPage> {
                         icon: BitmapDescriptor.defaultMarkerWithHue(
                             BitmapDescriptor.hueAzure),
                         position: _uicloc),
+                    Marker(
+                        markerId: MarkerId("_homeloc"),
+                        icon: BitmapDescriptor.defaultMarkerWithHue(
+                            BitmapDescriptor.hueMagenta),
+                        position: _homelocs),
                   },
                 ),
           Positioned(
@@ -95,27 +174,32 @@ class _MyWidgetState extends State<MapPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/bgimage.png'),
-                  fit: BoxFit
-                      .cover, // You can use BoxFit.fill for a different effect
+                  fit: BoxFit.cover,
                 ),
               ),
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    controller: pickupController,
+                    readOnly: true,
+                    onTap: () => _handlePressButton(context, true),
                     decoration: InputDecoration(
                       labelText: 'Pick up location',
                       border: OutlineInputBorder(),
-                      filled: true, // Add this line
-                      fillColor: Colors.white, // Add this line
+                      filled: true,
+                      fillColor: Colors.white,
                     ),
                   ),
                   SizedBox(height: 8.0),
                   TextFormField(
+                    controller: dropoffController,
+                    readOnly: true,
+                    onTap: () => _handlePressButton(context, true),
                     decoration: InputDecoration(
                       labelText: 'Drop off location',
                       border: OutlineInputBorder(),
-                      filled: true, // Add this line
-                      fillColor: Colors.white, // Add this line
+                      filled: true,
+                      fillColor: Colors.white,
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -125,7 +209,7 @@ class _MyWidgetState extends State<MapPage> {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Container(
-                          color: Colors.white, // Add this line
+                          color: Colors.white,
                           child: Text(value),
                         ),
                       );
@@ -162,40 +246,5 @@ class _MyWidgetState extends State<MapPage> {
     await controller.animateCamera(
       CameraUpdate.newCameraPosition(_newCameraPosition),
     );
-  }
-
-  Future<void> getLocationUpdates() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-
-    _serviceEnabled = await _locationController.serviceEnabled();
-
-    if (_serviceEnabled) {
-      _serviceEnabled = await _locationController.requestService();
-    } else {
-      return;
-    }
-
-    _permissionGranted = await _locationController.hasPermission();
-
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await _locationController.requestPermission();
-
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-
-    _locationController.onLocationChanged
-        .listen((LocationData currentLocation) {
-      if (currentLocation.latitude != null &&
-          currentLocation.longitude != null) {
-        setState(() {
-          _currentP =
-              LatLng(currentLocation.latitude!, currentLocation.longitude!);
-          _cameraToPosition(_currentP!);
-        });
-      }
-    });
   }
 }
