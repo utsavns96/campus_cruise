@@ -1,6 +1,7 @@
 // import 'dart:html';
 import 'dart:async';
 
+import 'package:campus_cruise/booked.dart';
 import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -134,7 +135,12 @@ class _MyWidgetState extends State<MapPage> {
                   ),
                   SizedBox(height: 8.0),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const BookedPage()));
+                    },
                     child: Text('Book'),
                   ),
                 ],
