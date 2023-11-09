@@ -62,7 +62,10 @@ class _MyWidgetState extends State<BookedPage> {
               CameraPosition(target: pickUpLocation, zoom: 13),
           polylines: {
             Polyline(
-                polylineId: PolylineId("route"), points: polyLineCoordinates)
+                polylineId: PolylineId("route"),
+                points: polyLineCoordinates,
+                color: const Color.fromARGB(255, 148, 82, 255),
+                width: 6)
           },
           markers: {
             Marker(
