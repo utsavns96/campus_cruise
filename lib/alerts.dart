@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void alertspage() => runApp(MaterialApp(
+void alertspage() => runApp(const MaterialApp(
   title: 'Campus Cruise',
   home: alertsscreen(),
 ));
@@ -18,7 +18,7 @@ class _alertsscreenState extends State<alertsscreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Campus Cruise',
           style: TextStyle(
             fontFamily: 'Raleway',
@@ -28,11 +28,11 @@ class _alertsscreenState extends State<alertsscreen> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0x00000000),
+        backgroundColor: const Color(0x00000000),
         elevation: 0.0,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/bgimage.png'),
             fit: BoxFit.cover,
@@ -67,15 +67,15 @@ class _basicState extends State<AlertScreenPage> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: Color(0x00000000),
+          backgroundColor: const Color(0x00000000),
           elevation: 0.0,
         ),
         body: Stack(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage("assets/bgimage.png"),
+                  image: AssetImage("assets/bgimage.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -95,8 +95,8 @@ class _basicState extends State<AlertScreenPage> {
                               width:350,
                               height:30,
                               color: Colors.amber,
-                              child: Center(
-                                child: const Text(
+                              child: const Center(
+                                child: Text(
                                   "ALERT",
                                   style: TextStyle(
                                     fontFamily: 'Raleway',
@@ -114,8 +114,8 @@ class _basicState extends State<AlertScreenPage> {
                                 width:350,
                                 height:125,
                                 color: Colors.black,
-                                child: Center(
-                                  child: const Text(
+                                child: const Center(
+                                  child: Text(
                                     "Night Ride Service Timings Change: Starting Fall 2023, NightRide Service will be available from 10:00 pm to 7:00 am on all 7 days of the week ",
                                     style: TextStyle(
                                       fontFamily: 'Raleway',
@@ -123,6 +123,7 @@ class _basicState extends State<AlertScreenPage> {
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
+                                    textAlign: TextAlign.center,
                                   ),
                                 )
                             )
@@ -138,15 +139,16 @@ class _basicState extends State<AlertScreenPage> {
                                   width:350,
                                   height:30,
                                   color: Colors.red,
-                                  child: Center(
-                                    child: const Text(
+                                  child: const Center(
+                                    child: Text(
                                         "WARNING",
                                         style: TextStyle(
                                           fontFamily: 'Raleway',
                                           fontSize: 25.0,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
-                                        )
+                                        ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   )
                               )
@@ -157,8 +159,8 @@ class _basicState extends State<AlertScreenPage> {
                                 width:350,
                                 height:125,
                                 color: Colors.black,
-                                child: Center(
-                                  child: const Text(
+                                child: const Center(
+                                  child: Text(
                                     "Night Ride Services are currently disrupted from Taylor & Racine to Taylor & Ada streets due to roadwork. Riders are requested to take this into account while booking rides",
                                     style: TextStyle(
                                       fontFamily: 'Raleway',
@@ -166,6 +168,7 @@ class _basicState extends State<AlertScreenPage> {
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
+                                    textAlign: TextAlign.center,
                                   ),
                                 )
                             )
@@ -181,8 +184,8 @@ class _basicState extends State<AlertScreenPage> {
                               width:350,
                               height:30,
                               color: Colors.deepPurpleAccent,
-                              child: Center(
-                                child: const Text(
+                              child: const Center(
+                                child: Text(
                                     "NOTICE",
                                     style: TextStyle(
                                       fontFamily: 'Raleway',
@@ -200,8 +203,8 @@ class _basicState extends State<AlertScreenPage> {
                               width:350,
                               height:125,
                               color: Colors.black,
-                              child: Center(
-                                child: const Text(
+                              child: const Center(
+                                child: Text(
                                   "Night Ride 7 is currently unavailable due to maintenance. Wait times may be higher due to this.",
                                   style: TextStyle(
                                     fontFamily: 'Raleway',
@@ -209,6 +212,7 @@ class _basicState extends State<AlertScreenPage> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
+                                  textAlign: TextAlign.center,
                                 ),
                               )
                             )
