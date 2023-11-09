@@ -89,7 +89,7 @@ class _MenuPageState extends State<MenuPage> {
           Column(
             children: <Widget>[
               Container(
-                  padding: const EdgeInsets.only(top: 100,bottom: 100),
+                  padding: const EdgeInsets.only(top: 100, bottom: 100),
                   child: Image.asset('assets/logo.png')),
               Container(
                   padding: const EdgeInsets.only(top: 50),
@@ -101,8 +101,8 @@ class _MenuPageState extends State<MenuPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) =>
-                                  const BasicScreenPage(title: 'Campus Cruise')));
+                              builder: (_) => const BasicScreenPage(
+                                  title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
@@ -121,11 +121,12 @@ class _MenuPageState extends State<MenuPage> {
                   height: 100,
                   child: FloatingActionButton(
                     onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MapPage()),
-                  );
-                },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MapPage()),
+                      );
+                    },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
@@ -147,8 +148,8 @@ class _MenuPageState extends State<MenuPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) =>
-                                  const AlertScreenPage(title: 'Campus Cruise')));
+                              builder: (_) => const AlertScreenPage(
+                                  title: 'Campus Cruise')));
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
@@ -173,31 +174,66 @@ class _MenuPageState extends State<MenuPage> {
               decoration: BoxDecoration(
                 color: Colors.lightBlue,
               ),
-              child: Text('Drawer Header'),
+              //child: Text('Drawer Header'),
+              child: Center(
+                  child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.account_circle,
+                    size: 100,
+                    color: Colors.white,
+                  ),
+                  Text('Test User')
+                ],
+              )),
             ),
             ListTile(
-              title: const Text('History'),
+              title: const Text(
+                'History',
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text('Feedback'),
+              title: const Text('Feedback',
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => const FeedbackPage(title: 'Campus Cruise')));
+                        builder: (_) =>
+                            const FeedbackPage(title: 'Campus Cruise')));
               },
             ),
             ListTile(
-              title: const Text('Contact Us'),
+              title: const Text('Contact Us',
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
               onTap: () {
                 //Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => const ContactUsPage(title: 'Campus Cruise')));
+                        builder: (_) =>
+                            const ContactUsPage(title: 'Campus Cruise')));
               },
             ),
           ],
