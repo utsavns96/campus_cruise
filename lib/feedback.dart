@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import 'feedbacksubmitted.dart';
+
 void feedbackPage() => runApp(const MaterialApp(
   title: 'Campus Cruise',
   home: FeedbackScreen(),
@@ -176,7 +178,7 @@ class FeedbackState extends State<FeedbackPage> {
                         child: FloatingActionButton(
                           onPressed: () {
                             //TO DO: Add login functionality
-                            //Navigator.push(context, MaterialPageRoute(builder: (_) => const MenuPage(title: 'Campus Cruise')));
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => FeedbackSubmittedScreen()));
                           },
                           backgroundColor: Colors.lightBlue,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
