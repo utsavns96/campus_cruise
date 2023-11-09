@@ -65,7 +65,9 @@ class _MyWidgetState extends State<BookedPage> {
                 polylineId: PolylineId("route"),
                 points: polyLineCoordinates,
                 color: const Color.fromARGB(255, 148, 82, 255),
-                width: 6)
+                width: 6),
+            // color: const Color.fromARGB(255, 148, 82, 255),
+            // width: 6)
           },
           markers: {
             Marker(
