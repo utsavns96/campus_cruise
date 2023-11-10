@@ -17,7 +17,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onBackPressed,
+        child: Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text(
@@ -146,26 +148,59 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-    );
+    ));
   }
-}
 
-class FirstPage extends StatelessWidget {
-  const FirstPage({Key? key, required this.title}) : super(key: key);
-  final String title;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: TextButton(
-          onPressed: () {},
-          child: const Text('Next'),
+  Future<bool> _onBackPressed() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Are you sure you want to exit?',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            )
         ),
+        content: const Text('Click Yes to exit, No continue',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            )
+        ),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () => Navigator.of(context).pop(false),
+            child: const Text("NO",
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                )
+            ),
+          ),
+          const SizedBox(height: 20),
+          GestureDetector(
+            onTap: () => Navigator.of(context).pop(true),
+            child: const Text("YES",
+                style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightBlue,
+                )
+            ),
+          ),
+        ],
       ),
-    );
+    ) ??
+        false;
   }
 }
+
+
