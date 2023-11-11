@@ -1,3 +1,4 @@
+import 'package:campus_cruise/book.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -168,7 +169,9 @@ class _MyWidgetState extends State<BookedPage> {
                   ),
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showCancelRidePopup(context);
+                      },
                       child: Text(
                         'Cancel Ride',
                         style: TextStyle(color: Colors.white),
@@ -186,4 +189,87 @@ class _MyWidgetState extends State<BookedPage> {
       ),
     );
   }
+}
+
+void showCancelRidePopup(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.transparent,
+        contentPadding: EdgeInsets.all(0),
+        content: Container(
+          width: MediaQuery.of(context).size.width * 0.8, // 90% of screen width
+          height:
+              MediaQuery.of(context).size.height * 0.4, // 50% of screen height
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/bgimage.png'),
+              fit: BoxFit.cover,
+            ),
+            border: Border.all(
+              color: Colors.white,
+              width: 3,
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Center(
+                child: Text(
+                  'Cancel Ride?',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+              Text(
+                'Are you sure you want to cancel your ride?',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              Text(
+                'Re-booking after canceling a ride will place you at the end of the queue for pick up.',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              SizedBox(height: 10),
+              TextButton(
+                child: Text(
+                  'Continue ride',
+                  style: TextStyle(color: Colors.blue),
+                ),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              SizedBox(height: 10),
+              TextButton(
+                child: Text(
+                  'Cancel ride',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const MapPage()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
