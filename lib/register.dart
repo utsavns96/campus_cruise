@@ -147,7 +147,7 @@ class _basicState extends State<RegisterScreenPage> {
                     child: FloatingActionButton(
                       onPressed: () {
                         //TO DO: Add login functionality
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => RegistrationSucessScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => RegistrationSuccessfulScreenPage(title: 'Campus Cruise')));
                       },
                       backgroundColor: Colors.lightBlue,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
