@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:campus_cruise/booked.dart';
+import 'package:campus_cruise/home.dart';
 import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -22,7 +23,7 @@ class _MyWidgetState extends State<MapPage> {
       Completer<GoogleMapController>();
 
   static LatLng _uicloc = LatLng(41.869849, -87.647914);
-  static LatLng _homelocs = LatLng(41.868473, -87.658735);
+  static LatLng _homelocs = LatLng(41.698782, -88.184463);
   LatLng? _currentP = null;
 
   gmaps.GoogleMapsPlaces _places =
@@ -136,7 +137,15 @@ class _MyWidgetState extends State<MapPage> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => const MenuPage(
+                        title: 'Campus Cruise',
+                      )),
+            );
+          },
         ),
       ),
       body: Stack(
