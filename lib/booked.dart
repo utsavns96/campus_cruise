@@ -120,7 +120,7 @@ class _MyWidgetState extends State<BookedPage> {
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 24)),
                             TextSpan(
-                                text: 'Niki Soni',
+                                text: 'Mehar Gambhir',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 24)),
                           ],
