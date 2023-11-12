@@ -48,13 +48,6 @@ class _MyWidgetState extends State<BookedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
       body: Stack(
         children: [
           GoogleMap(

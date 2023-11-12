@@ -1,11 +1,13 @@
 import 'package:campus_cruise/login.dart';
 import 'package:campus_cruise/registrationsuccessful.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void registerpage() => runApp(MaterialApp(
-  title: 'Campus Cruise',
-  home: registerscreen(),
-));
+      title: 'Campus Cruise',
+      home: registerscreen(),
+    ));
 
 class registerscreen extends StatefulWidget {
   const registerscreen({super.key});
@@ -54,8 +56,29 @@ class RegisterScreenPage extends StatefulWidget {
 }
 
 class _basicState extends State<RegisterScreenPage> {
+  static Future<User?> registerUsingEmailPassword(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user=not-found") {
+        print("No user found for that email");
+      }
+    }
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -85,25 +108,26 @@ class _basicState extends State<RegisterScreenPage> {
             Column(
               children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.only(top: 100),
-                  child: Image.asset('assets/logo.png')),
-                    Container(
-                      padding: const EdgeInsets.only(top: 10, bottom: 50),
-                      child: const Text(
-                        "Register:",
-                        style: TextStyle(
-                        fontFamily: 'Raleway',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 8.0,
-                      ),
+                    padding: const EdgeInsets.only(top: 100),
+                    child: Image.asset('assets/logo.png')),
+                Container(
+                  padding: const EdgeInsets.only(top: 10, bottom: 50),
+                  child: const Text(
+                    "Register:",
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 8.0,
                     ),
                   ),
+                ),
                 Container(
                   padding: const EdgeInsets.all(10.0),
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter your Email ID',
                       hintText: 'Enter valid mail id as abc@uic.edu',
@@ -114,8 +138,9 @@ class _basicState extends State<RegisterScreenPage> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(10.0),
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter your Password',
                       hintText: 'Enter password',
@@ -145,12 +170,25 @@ class _basicState extends State<RegisterScreenPage> {
                     width: 300,
                     height: 100,
                     child: FloatingActionButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        User? user = await registerUsingEmailPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            context: context);
+                        print(user);
+                        if (user != null) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      RegistrationSuccessfulScreenPage(
+                                          title: 'Campus Cruise')));
+                        }
                         //TO DO: Add login functionality
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => RegistrationSuccessfulScreenPage(title: 'Campus Cruise')));
                       },
                       backgroundColor: Colors.lightBlue,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
                       child: const Text('Register',
                           style: TextStyle(
                             fontFamily: 'Raleway',
@@ -159,10 +197,9 @@ class _basicState extends State<RegisterScreenPage> {
                             color: Colors.white,
                           )),
                     ))
-                ],
+              ],
             )
           ],
-        )
-    );
+        ));
   }
 }
