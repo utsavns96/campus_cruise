@@ -61,6 +61,9 @@ dev_dependencies:
   location: ^5.0.3
   flutter_google_places_hoc081098: ^1.1.0
   google_maps_webservice: ^0.0.19
+  firebase_auth: ^4.13.0
+
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
