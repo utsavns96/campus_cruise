@@ -19,6 +19,8 @@ class MapPage extends StatefulWidget {
 class _MyWidgetState extends State<MapPage> {
   Location _locationController = new Location();
 
+  String dropdownValue = '1';
+
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
@@ -68,8 +70,8 @@ class _MyWidgetState extends State<MapPage> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Error'),
-                    content: Text(
+                    title: const Text('Error'),
+                    content: const Text(
                         'Selected location is outside the boundary. Please reselect a location.'),
                     actions: <Widget>[
                       TextButton(
@@ -253,17 +255,26 @@ class _MyWidgetState extends State<MapPage> {
                   ),
                   SizedBox(height: 8.0),
                   DropdownButton<String>(
-                    items:
-                        <String>['1', '2', '3', '4', '5'].map((String value) {
+                    value: dropdownValue,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                    },
+                    items: <String>['1', '2', '3', '4', '5']
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Container(
                           color: Colors.white,
-                          child: Text(value),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       );
                     }).toList(),
-                    onChanged: (_) {},
                     hint: Text('Select number of riders'),
                   ),
                   SizedBox(height: 8.0),
