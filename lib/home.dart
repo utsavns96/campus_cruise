@@ -6,6 +6,7 @@ import 'book.dart';
 import 'contactus.dart';
 import 'feedback.dart';
 import 'history.dart';
+import 'shuttlelocator.dart';
 
 void homepage() => runApp(const MaterialApp(
       title: 'Campus Cruise',
@@ -99,11 +100,12 @@ class _MenuPageState extends State<MenuPage> {
                   child: FloatingActionButton(
                     onPressed: () {
                       //TO DO: Add login functionality
+
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const BasicScreenPage(
-                                  title: 'Campus Cruise')));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ShuttleLoc()),
+                      );
                     },
                     backgroundColor: Colors.lightBlue,
                     shape: RoundedRectangleBorder(
