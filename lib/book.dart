@@ -17,6 +17,18 @@ class MapPage extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MapPage> {
+  BitmapDescriptor vanMarker = BitmapDescriptor.defaultMarker;
+
+  void addCustomIcon() {
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(5, 5)), "assets/van.png")
+        .then((icon) {
+      setState(() {
+        vanMarker = icon;
+      });
+    });
+  }
+
   Location _locationController = new Location();
 
   String dropdownValue = '1';
@@ -127,6 +139,7 @@ class _MyWidgetState extends State<MapPage> {
 
   @override
   void initState() {
+    addCustomIcon();
     super.initState();
     getLocationUpdates();
   }
@@ -184,8 +197,9 @@ class _MyWidgetState extends State<MapPage> {
                   markers: {
                     Marker(
                         markerId: MarkerId("_currentLocation"),
-                        icon: BitmapDescriptor.defaultMarkerWithHue(
-                            BitmapDescriptor.hueGreen),
+                        // icon: BitmapDescriptor.defaultMarkerWithHue(
+                        //     BitmapDescriptor.hueGreen),
+                        icon: vanMarker,
                         position: _currentP!),
                     Marker(
                         markerId: MarkerId("_sourceLocation"),
