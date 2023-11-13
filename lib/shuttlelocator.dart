@@ -1,78 +1,156 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:location/location.dart';
+
+import 'package:campus_cruise/booked.dart';
+import 'package:campus_cruise/home.dart';
 
 class ShuttleLoc extends StatefulWidget {
-  const ShuttleLoc({super.key});
+  const ShuttleLoc({Key? key}) : super(key: key);
 
   @override
   State<ShuttleLoc> createState() => _ShuttleLocState();
 }
 
 class _ShuttleLocState extends State<ShuttleLoc> {
-  static const LatLng pickUpLocation = LatLng(41.869745, -87.648509);
-  static const LatLng dropOffLocation =
-      LatLng(41.871309928210664, -87.66177895956177);
-  String apikey = 'AIzaSyAxcYboZEC-2VQhftB4rPMo2Gsi_K-ywiE';
+  BitmapDescriptor vanMarker = BitmapDescriptor.defaultMarker;
 
-  List<LatLng> polyLineCoordinates = [];
-  Future<void> getPolyPoints() async {
-    String apikey = 'AIzaSyAxcYboZEC-2VQhftB4rPMo2Gsi_K-ywiE';
-    PolylinePoints polylinePoints = PolylinePoints();
-    var result = await polylinePoints.getRouteBetweenCoordinates(
-      apikey,
-      PointLatLng(pickUpLocation.latitude, pickUpLocation.longitude),
-      PointLatLng(dropOffLocation.latitude, dropOffLocation.longitude),
+  void addCustomIcon() {
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(), "assets/van4.png")
+        .then((icon) {
+      setState(() {
+        vanMarker = icon;
+      });
+    });
+  }
+
+  static LatLng _uicloc = LatLng(41.869849, -87.647914);
+  final Completer<GoogleMapController> _mapController =
+      Completer<GoogleMapController>();
+  Location _locationController = new Location();
+  LatLng? _currentP;
+
+  Future<void> _cameraToPosition(LatLng pos) async {
+    final GoogleMapController controller = await _mapController.future;
+    CameraPosition _newCameraPosition = CameraPosition(
+      target: pos,
+      zoom: 13,
     );
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng pnt) => polyLineCoordinates.add(
-            LatLng(pnt.latitude, pnt.longitude),
-          ));
-      setState(() {});
-    }
-    // Use or return the result here
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(_newCameraPosition),
+    );
+  }
 
-    void initState() {
-      getPolyPoints();
-      super.initState();
+  Future<void> getLocationUpdates() async {
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await _locationController.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await _locationController.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
     }
+
+    _permissionGranted = await _locationController.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await _locationController.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationController.onLocationChanged
+        .listen((LocationData currentLocation) {
+      if (currentLocation.latitude != null &&
+          currentLocation.longitude != null) {
+        setState(() {
+          _currentP =
+              LatLng(currentLocation.latitude!, currentLocation.longitude!);
+          _cameraToPosition(_currentP!);
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    addCustomIcon();
+    super.initState();
+    getLocationUpdates();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
+    Set<Marker> markers = {};
+    if (_currentP != null) {
+      markers.add(
+        Marker(
+          markerId: MarkerId("_currentLocation"),
+          icon:
+              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+          position: _currentP!,
         ),
-      ),
-      body: GoogleMap(
-          initialCameraPosition:
-              CameraPosition(target: pickUpLocation, zoom: 13),
-          polylines: {
-            Polyline(
-                polylineId: PolylineId("route"),
-                points: polyLineCoordinates,
-                color: Colors.blue,
-                width: 10)
-          },
-          markers: {
-            Marker(
-              markerId: MarkerId("Source"),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                  BitmapDescriptor.hueAzure),
-              position: pickUpLocation,
-            ),
-            Marker(
-              markerId: MarkerId("Source"),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                  BitmapDescriptor.hueOrange),
-              position: dropOffLocation,
-            ),
-          }),
-    );
+      );
+    }
+
+    return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const MenuPage(
+                          title: 'Campus Cruise',
+                        )),
+              );
+            },
+          ),
+        ),
+        body: Stack(children: <Widget>[
+          _currentP == null
+              ? Center(
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/bgimage.png',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                      Center(
+                        child: Text(
+                          'Map Loading...',
+                          style: TextStyle(
+                            fontSize: 35,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : GoogleMap(
+                  onMapCreated: ((GoogleMapController controller) =>
+                      _mapController.complete(controller)),
+                  initialCameraPosition: CameraPosition(
+                    target: _uicloc,
+                    zoom: 14,
+                  ),
+                  markers: {
+                    Marker(
+                        markerId: MarkerId("_currentLocation"),
+                        icon: vanMarker,
+                        position: _currentP!),
+                  },
+                )
+        ]));
   }
 }
