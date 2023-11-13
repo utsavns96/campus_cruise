@@ -254,28 +254,35 @@ class _MyWidgetState extends State<MapPage> {
                     ),
                   ),
                   SizedBox(height: 8.0),
-                  DropdownButton<String>(
-                    value: dropdownValue,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownValue = newValue!;
-                      });
-                    },
-                    items: <String>['1', '2', '3', '4', '5']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Container(
-                          color: Colors.white,
-                          child: Text(
-                            value,
-                            style: TextStyle(color: Colors.black),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                    hint: Text('Select number of riders'),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        'Select number of riders',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                      DropdownButton<String>(
+                        value: dropdownValue,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                          });
+                        },
+                        items: <String>['1', '2', '3', '4', '5']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Container(
+                              color: Colors.white,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.black),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 8.0),
                   ElevatedButton(
@@ -285,8 +292,14 @@ class _MyWidgetState extends State<MapPage> {
                           MaterialPageRoute(
                               builder: (_) => const BookedPage()));
                     },
-                    child: Text('Book'),
-                  ),
+                    child: Text(
+                      'Book',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.lightBlue, // background color
+                    ),
+                  )
                 ],
               ),
             ),
