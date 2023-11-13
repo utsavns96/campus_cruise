@@ -304,7 +304,10 @@ class _MyWidgetState extends State<MapPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => const BookedPage()));
+                              builder: (_) =>  BookedPage(
+                                    pickUpLocation: _uicloc,
+                                    dropOffLocation: _homelocs,
+                                  )));
                     },
                     child: Text(
                       'Book',

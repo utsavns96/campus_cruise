@@ -4,16 +4,20 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 class BookedPage extends StatefulWidget {
-  const BookedPage({super.key});
+  final LatLng pickUpLocation;
+  final LatLng dropOffLocation;
+  BookedPage(
+      {Key? key, required this.pickUpLocation, required this.dropOffLocation})
+      : super(key: key);
 
   @override
   State<BookedPage> createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<BookedPage> {
-  static const LatLng pickUpLocation = LatLng(41.869745, -87.648509);
-  static const LatLng dropOffLocation =
-      LatLng(41.871309928210664, -87.66177895956177);
+  late LatLng pickUpLocation;
+  late LatLng dropOffLocation;
+
   String apikey = 'AIzaSyAxcYboZEC-2VQhftB4rPMo2Gsi_K-ywiE';
 
   List<LatLng> polyLineCoordinates = [];
@@ -40,8 +44,11 @@ class _MyWidgetState extends State<BookedPage> {
 
   @override
   void initState() {
+    pickUpLocation = widget.pickUpLocation;
+    dropOffLocation = widget.dropOffLocation;
     getPolyPoints();
     super.initState();
+    
   }
 
   @override
