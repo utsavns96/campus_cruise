@@ -197,8 +197,6 @@ class _MyWidgetState extends State<MapPage> {
                   markers: {
                     Marker(
                         markerId: MarkerId("_currentLocation"),
-                        // icon: BitmapDescriptor.defaultMarkerWithHue(
-                        //     BitmapDescriptor.hueGreen),
                         icon: vanMarker,
                         position: _currentP!),
                     Marker(
