@@ -21,7 +21,7 @@ class _MyWidgetState extends State<MapPage> {
 
   void addCustomIcon() {
     BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(size: Size(5, 5)), "assets/van.png")
+            const ImageConfiguration(), "assets/van4.png")
         .then((icon) {
       setState(() {
         vanMarker = icon;
