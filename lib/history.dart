@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
 
+import 'home.dart';
+
 void HistoryPage() => runApp(MaterialApp(
       title: 'Campus Cruise',
       home: HistoryScreen(),
@@ -79,7 +81,16 @@ class _HistoryState extends State<HistoryPageScreen> {
               ),
               leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.black),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const MenuPage(
+                            title: 'Campus Cruise',
+                          )),
+                          (Route<dynamic> route) => false
+                  );
+                },
               ),
               centerTitle: true,
               //backgroundColor: Color(0x00000000),

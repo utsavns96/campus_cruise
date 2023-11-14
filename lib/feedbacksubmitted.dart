@@ -19,8 +19,10 @@ class _FeedbackSubmittedScreenState extends State<FeedbackSubmittedScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(
-          builder: (_) => const MenuPage(title: 'Campus Cruise')));
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+          builder: (_) => const MenuPage(title: 'Campus Cruise')),
+        (Route<dynamic> route) => false
+      );
     });
   }
 

@@ -270,48 +270,32 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Future<bool> _onBackPressed() async {
-    return await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Are you sure you want to exit?',
-                style: TextStyle(
-                  fontFamily: 'Raleway',
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                )),
-            content: const Text('Click Yes to exit, No continue',
-                style: TextStyle(
-                  fontFamily: 'Raleway',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                )),
-            actions: <Widget>[
-              GestureDetector(
-                onTap: () => Navigator.of(context).pop(false),
-                child: const Text("NO",
-                    style: TextStyle(
-                      fontFamily: 'Raleway',
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    )),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () => Navigator.of(context).pop(true),
-                child: const Text("YES",
-                    style: TextStyle(
-                      fontFamily: 'Raleway',
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.lightBlue,
-                    )),
-              ),
-            ],
+    return await showDialog( //show confirm dialogue
+      //the return value will be from "Yes" or "No" options
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Exit App'),
+        content: Text('Do you want to exit the app?'),
+        actions:[
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            //return false when click on "NO"
+            child:Text('No'),
           ),
-        ) ??
-        false;
+
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            // onPressed: () => Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (BuildContext context) => Login()),
+            //         (Route<dynamic> route) => false
+            // ),
+            //return true when click on "Yes"
+            child:Text('Yes'),
+          ),
+
+        ],
+      ),
+    )??false; //if showDialouge had returned null, then return false
   }
 }

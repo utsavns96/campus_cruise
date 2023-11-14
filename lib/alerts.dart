@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home.dart';
+
 void alertspage() => runApp(const MaterialApp(
   title: 'Campus Cruise',
   home: alertsscreen(),
@@ -69,6 +71,19 @@ class _basicState extends State<AlertScreenPage> {
           centerTitle: true,
           backgroundColor: const Color(0x00000000),
           elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const MenuPage(
+                        title: 'Campus Cruise',
+                      )),
+                      (Route<dynamic> route) => false
+              );
+            },
+          ),
         ),
         body: Stack(
           children: <Widget>[

@@ -104,12 +104,13 @@ class _ShuttleLocState extends State<ShuttleLoc> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                     builder: (_) => const MenuPage(
                           title: 'Campus Cruise',
                         )),
+                      (Route<dynamic> route) => false
               );
             },
           ),

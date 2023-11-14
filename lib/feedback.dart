@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'feedbacksubmitted.dart';
+import 'home.dart';
 
 void feedbackPage() => runApp(const MaterialApp(
   title: 'Campus Cruise',
@@ -33,6 +34,19 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         centerTitle: true,
         backgroundColor: const Color(0x00000000),
         elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const MenuPage(
+                      title: 'Campus Cruise',
+                    )),
+                    (Route<dynamic> route) => false
+            );
+          },
+        ),
       ),
       // body: Container(
       //   decoration: const BoxDecoration(
