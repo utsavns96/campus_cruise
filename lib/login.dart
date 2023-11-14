@@ -3,6 +3,7 @@ import 'package:campus_cruise/register.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'forgotpassword.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -126,7 +127,13 @@ class _LoginState extends State<Login> {
                     alignment: Alignment.centerRight,
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: TextButton(
-                      onPressed: _forgotPassword,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const ForgotPasswordScreenPage(
+                                      title: 'Campus Cruise')));
+                        },
                       child: Text(
                         'Forgot Password?',
                         style: TextStyle(
@@ -254,7 +261,5 @@ class _LoginState extends State<Login> {
         ) ??
         false;
   }
-  void _forgotPassword() {
-    print ("Forgot Password Button Pressed");
-  }
+
 }
