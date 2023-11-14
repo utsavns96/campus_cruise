@@ -1,3 +1,4 @@
+import 'package:campus_cruise/login.dart';
 import 'package:flutter/material.dart';
 
 import 'alerts.dart';
@@ -179,7 +180,6 @@ class _MenuPageState extends State<MenuPage> {
                   decoration: BoxDecoration(
                     color: Colors.lightBlue,
                   ),
-                  //child: Text('Drawer Header'),
                   child: Center(
                       child: Column(
                     children: <Widget>[
@@ -239,12 +239,28 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                   onTap: () {
-                    //Navigator.pop(context);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (_) =>
                                 const ContactUsPage(title: 'Campus Cruise')));
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    'Sign Out',
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => Login()),
+                      (Route<dynamic> route) => false,
+                    );
                   },
                 ),
               ],
