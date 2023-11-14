@@ -22,3 +22,6 @@ To use the application in debugging mode, the user needs to have Android Studio 
 3) Either create a virtual device or connect an android device. Please note - a physical device being used for debugging must have it's developer settings enabled, and needs USB Debugging to be turned on.<br>
 4) Launch the application from login.<br>
 
+### A note about live tracking:
+
+Since we are only focussing on the user side of the application, the backend required to monitor a driver does not exist yet. Therefore, to simulate tracking of the van when viewing the Shuttle Locator and Book A Ride screens, we use a GPS Emulator application. These are freely available on the playstore, and allow users to create routes along which they can simulate the movement of a gps signal. The app that we use is available here: https://play.google.com/store/apps/details?id=com.rosteam.gpsemulator&hl=en&gl=US <br>
