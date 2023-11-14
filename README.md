@@ -16,7 +16,7 @@ On Samsung devices (the device used during development), if the user navigates t
 
 ## Launching the application for debugging
 
-To use the application in debugging mode, the user needs to have Android Studio installed, with Android SDK 33.<br>
+To use the application in debugging mode, the user needs to have Android Studio installed, with Android SDK 33, and the plugins for Flutter and Dart.<br>
 1) Clone the git repo.<br>
 2) Launch Android Studio and open the project.<br>
 3) Either create a virtual device or connect an android device. Please note - a physical device being used for debugging must have it's developer settings enabled, and needs USB Debugging to be turned on.<br>
