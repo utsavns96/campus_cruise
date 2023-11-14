@@ -123,6 +123,19 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextButton(
+                      onPressed: _forgotPassword,
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                        color: Colors.white,
+                        )
+                      )
+                    )
+                  ),
+                  Container(
                       padding: const EdgeInsets.only(top: 50),
                       width: 300,
                       height: 100,
@@ -154,7 +167,7 @@ class _LoginState extends State<Login> {
                             )),
                       )),
                   Container(
-                    padding: const EdgeInsets.only(top: 150),
+                    padding: const EdgeInsets.only(top: 100),
                     child: const Text(
                       "New user? Click on the button below to register",
                       style: TextStyle(
@@ -240,5 +253,8 @@ class _LoginState extends State<Login> {
           ),
         ) ??
         false;
+  }
+  void _forgotPassword() {
+    print ("Forgot Password Button Pressed");
   }
 }
