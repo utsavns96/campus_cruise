@@ -3,6 +3,8 @@ Repository for the final project of CS522 @ UIC Fall '23
 
 #### A ridesharing application for university students
 
+### Demo: https://youtu.be/Hq_3fLXhYeI
+
 ## Installing the Application
 
 This app is currently deployed for Android 13 and up, and thus requires a device that meets those specifications.
